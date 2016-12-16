@@ -3,7 +3,7 @@ var categories = require("./categoryModel");
 // setup boilerplate route jsut to satisfy a request
 // for building
 
-//working
+// get all
 router.route('/')
   .get(function(req, res){
 	categories.find({}, function(err, data){
@@ -16,7 +16,7 @@ router.route('/')
     console.log('Hey from categories!!');
   });
   
-  //working
+  // post
   router.route('/')
 	.post(function(req, res){
 		var categoryData = {name: req.body.name};
@@ -27,7 +27,7 @@ router.route('/')
 		
 		
 	});
-//working
+// get one
 router.route('/:category_id')
 	.get(function(req, res){
 		var id = req.params.category_id;
@@ -41,7 +41,7 @@ router.route('/:category_id')
 		
 	});
 	
-// /:category_id PUT request working
+// update
 router.route('/:category_id')
 	.put(function(req, res){
 		var id = req.params.category_id;
@@ -57,7 +57,7 @@ router.route('/:category_id')
 			}			
 		});
 	});
-	//works
+	// delete
 router.route('/:category_id')
 		.delete(function(req, res){
 			var id = req.params.category_id;
@@ -72,14 +72,14 @@ router.route('/:category_id')
 			
 		});
 		
-  //error-handling middleware
+// error-handling middleware
 router.get('*', function(req, res, next){
 	var err = new Error();
 	err.status = 404;
 	next(err);
 });  
   
-
+// next() function
 router.use(function(err, req, res, next){
 	if(err.status !== 404){
 		return next();

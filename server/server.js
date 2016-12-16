@@ -1,3 +1,8 @@
+/**
+Name: Quoc Nguyen
+Class: CMPE/SE 172
+Final Coding
+*/
 var express = require('express');
 var app = express();
 var api = require('./api/api');

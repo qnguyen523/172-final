@@ -5,7 +5,7 @@ var post = require("./postModel");
 // setup boilerplate route jsut to satisfy a request
 // for building
 
-//working
+// get all
 router.route('/')
   .get(function(req, res){
 	post.find({})
@@ -21,7 +21,7 @@ router.route('/')
     console.log('Hey from post!!');
   });
   
-  //ehh, works enough
+  // post
   router.route('/')
 	.post(function(req,res){
 		var postData = {title: req.body.title,
@@ -37,7 +37,7 @@ router.route('/')
 			}
 		});
 	});
-	
+	// get one
 	router.route('/:post_id')
 		.get(function(req, res){
 			var id = req.params.post_id;
@@ -52,7 +52,7 @@ router.route('/')
 			
 			
 		});
-		
+		// update
 router.route('/:post_id')
 	.put(function(req, res){
 		var id = req.params.post_id;
@@ -73,7 +73,7 @@ router.route('/:post_id')
 		});
 		
 	});
-	
+	// delete
 router.route('/:post_id')
 	.delete(function(req, res){
 		var id = req.params.post_id;
@@ -86,6 +86,21 @@ router.route('/:post_id')
 		});	
 	});
 		
-
+// error-handling middleware
+router.get('*', function(req, res, next){
+	var err = new Error();
+	err.status = 404;
+	next(err);
+});  
+  
+// next() function
+router.use(function(err, req, res, next){
+	if(err.status !== 404){
+		return next();
+	}else{
+		
+		res.send("Page not found");
+	}
+})
 
 module.exports = router;

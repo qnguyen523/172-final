@@ -18,10 +18,12 @@ var PostSchema = new Schema({
          ref: 'user',
          required:true
         },
+  // reference to the category
   categories:
 		[{
 		type: Schema.Types.ObjectId,
-		ref: 'category'
+		ref: 'category',
+    required:true
 		}]
 
 });

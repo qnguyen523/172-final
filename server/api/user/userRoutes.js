@@ -4,7 +4,7 @@ var user = require("./userModel");
 //So if you have same URL but with different HTTP OP such as POST,GET etc
 //Then use route() to remove redundant code.
 
-//working
+// get
 router.route('/')
   .get(function(req, res){
 	  
@@ -17,25 +17,19 @@ router.route('/')
 
 	 });
     console.log('Hey from user!!');
-    // var user1 = {name: 'modulus admin', address: "sjsu"};
-	// var user2 = {name: 'modulus user', address: "sjsu2"};
-	// this.User.db.collection.save([user1, user2], function(err, records)
-	// {
-	// 	res.send('saved');
-	// })
   });
- //working
+ // post
 router.route('/')
 	.post(function(req, res){
 			var userData = {username: req.body.name,
 							address: req.body.address};
 			var account = new user(userData);
 			account.save(function(err, records){
-				res.send('User successfully inserted');
+				res.send(userData);
 			});
 	});
 	
-//working
+// get
 router.route('/:user_id')
 	.get(function(req, res){
 		var id = req.params.user_id;
@@ -47,7 +41,7 @@ router.route('/:user_id')
 			}
 		});
 	});
-//working
+// update
 router.route('/:user_id')
 		.put(function(req, res){
 			var id = req.params.user_id;
@@ -65,7 +59,7 @@ router.route('/:user_id')
 			});
 			
 		});
-  //working
+  // delete
  router.route('/:user_id')
 		.delete(function(req, res){
 			var id = req.params.user_id;
@@ -82,21 +76,21 @@ router.route('/:user_id')
 			
 		});
   
-  //error-handling middleware
+// error-handling middleware
 router.get('*', function(req, res, next){
 	console.log("error");
 	var err = new Error();
-	err.status = 404;
+	err.status = 500;
 	next(err);
 });  
   
-
+// when calling next()
 router.use(function(err, req, res, next){
-	if(err.status !== 404){
+	if(err.status !== 500){
 		return next();
 	}else{
-		
-		res.send("Page not found");
+		// when page is not found, send 500 code
+		res.send(500);
 	}
 })
   
