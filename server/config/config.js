@@ -3,7 +3,6 @@ module.exports = {
 logging: false,
   db: {
         // the database url to connect!                                                                                                                                              
-        // url: 'mongodb://localhost:27017/finals-test'
         url: 'mongodb://localhost/test'
     }
 }
