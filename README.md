@@ -1,5 +1,5 @@
-I run my server locally
-database server: url: 'mongodb://localhost/test'
+I run my server locally at port 8080. 
+My database server: url: 'mongodb://localhost/test'
 
 POST, PUT, and GET requests can also be tested with Postman app.
 
